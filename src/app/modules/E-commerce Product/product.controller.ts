@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, query } from 'express';
 import { ProductService } from './product.services';
 
 //createProduct Api
@@ -76,7 +76,7 @@ const updateProductById = async (req: Request, res: Response) => {
 
     res.status(200).json({
       success: true,
-      message: 'Products fetched successfully!',
+      message: 'Product updated successfully!',
       data: result,
     });
   } catch (err) {
@@ -109,10 +109,34 @@ const deleteProductById = async (req: Request, res: Response) => {
   }
 };
 
+//Search a product Api
+
+const searchProductByName = async (req: Request, res: Response) => {
+  try {
+    const { name } = req.query;
+    console.log(name);
+
+    const result = await ProductService.searchProductName(name as string);
+
+    res.status(200).json({
+      success: true,
+      message: 'Product deleted successfully!',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      error: err,
+    });
+  }
+};
+
 export const ProductController = {
   createProduct,
   getAllProduct,
   getProductById,
   updateProductById,
   deleteProductById,
+  searchProductByName,
 };

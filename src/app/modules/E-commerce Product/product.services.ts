@@ -31,6 +31,10 @@ const updateProductByIdInToDB = async (
   const result = await ProductModel.findByIdAndUpdate(
     { _id: productId },
     updateData,
+    {
+      new: true,
+      runValidators: true,
+    },
   );
   return result;
 };
@@ -42,10 +46,20 @@ const deleteProductByIdInToDB = async (productId: string) => {
   return result;
 };
 
+//Search a product Api
+
+const searchProductName = async (Name: string) => {
+  const result = await ProductModel.find({
+    $or: [{ name: { $regex: Name, $options: 'i' } }],
+  });
+  return result;
+};
+
 export const ProductService = {
   createProductIntoDB,
   getAllProductIntoDB,
   getProductByIdInToDB,
   updateProductByIdInToDB,
   deleteProductByIdInToDB,
+  searchProductName,
 };

@@ -8,5 +8,6 @@ route.get('/products', ProductController.getAllProduct);
 route.get('/products/:productId', ProductController.getProductById);
 route.put('/products/:productId', ProductController.updateProductById);
 route.delete('/products/:productId', ProductController.deleteProductById);
+route.get('/productsId', ProductController.searchProductByName);
 
 export const productsRoute = route;
