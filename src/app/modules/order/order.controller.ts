@@ -5,8 +5,8 @@ import { OrderService } from './order.services';
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const { order } = req.body;
-    const result = await OrderService.createOrderIntoDB(order);
+    const { orders } = req.body;
+    const result = await OrderService.createOrderIntoDB(orders);
 
     res.status(200).json({
       success: true,
@@ -22,6 +22,56 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
+//getAllOrder Api
+
+const getAllOrder = async (req: Request, res: Response) => {
+  try {
+    const result = await OrderService.getAllOrderIntoDB();
+
+    res.status(200).json({
+      success: true,
+      message: 'Orders fetched successfully!',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      error: err,
+    });
+  }
+};
+
+//Search a product Api
+
+const searchOrderByEmail = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.query;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email query parameter is required.',
+      });
+    }
+
+    const result = await OrderService.searchOrderEmail(email as string);
+
+    res.status(200).json({
+      success: true,
+      message: 'Orders fetched successfully for user email!',
+      data: result,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
+      error: err,
+    });
+  }
+};
 export const OrderController = {
   createOrder,
+  getAllOrder,
+  searchOrderByEmail,
 };
