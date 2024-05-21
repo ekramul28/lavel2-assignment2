@@ -1,14 +1,14 @@
-type Variant = {
+export type Variant = {
   type: string;
   value: string;
 };
 
-type Inventory = {
+export type Inventory = {
   quantity: number;
   inStock: boolean;
 };
 
-type Product = {
+export type Product = {
   name: string;
   description: string;
   price: number;
@@ -17,5 +17,3 @@ type Product = {
   variants: Variant[];
   inventory: Inventory;
 };
-
-export default Product;
