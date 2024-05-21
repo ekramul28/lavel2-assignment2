@@ -22,8 +22,30 @@ const getProductByIdInToDB = async (productId: string) => {
   return result;
 };
 
+//Update Product Api
+
+const updateProductByIdInToDB = async (
+  productId: string,
+  updateData: Product,
+) => {
+  const result = await ProductModel.findByIdAndUpdate(
+    { _id: productId },
+    updateData,
+  );
+  return result;
+};
+
+//Delete a Product Api
+
+const deleteProductByIdInToDB = async (productId: string) => {
+  const result = await ProductModel.deleteOne({ _id: productId });
+  return result;
+};
+
 export const ProductService = {
   createProductIntoDB,
   getAllProductIntoDB,
   getProductByIdInToDB,
+  updateProductByIdInToDB,
+  deleteProductByIdInToDB,
 };
