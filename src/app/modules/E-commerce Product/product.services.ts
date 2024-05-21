@@ -12,4 +12,5 @@ const getAllProductIntoDB = async () => {
 
 export const ProductService = {
   createProductIntoDB,
+  getAllProductIntoDB,
 };

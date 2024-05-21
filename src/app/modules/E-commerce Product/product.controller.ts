@@ -16,7 +16,24 @@ const createProduct = async (req: Request, res: Response) => {
     console.log(err);
     res.status(500).json({
       success: false,
-      message: 'something went worn!',
+      message: 'Something went wrong!',
+      error: err,
+    });
+  }
+};
+const getAllProduct = async (req: Request, res: Response) => {
+  try {
+    const result = await ProductService.getAllProductIntoDB();
+
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong!',
       error: err,
     });
   }
@@ -24,4 +41,5 @@ const createProduct = async (req: Request, res: Response) => {
 
 export const ProductController = {
   createProduct,
+  getAllProduct,
 };
