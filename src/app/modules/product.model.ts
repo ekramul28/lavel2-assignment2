@@ -1,6 +1,11 @@
 import { Schema, model } from 'mongoose';
+import {
+  Inventory,
+  Product,
+  Variant,
+} from './E-commerce Product/product.interface';
 
-const variantSchema = new Schema({
+const variantSchema = new Schema<Variant>({
   type: {
     type: String,
     required: [true, 'Variant type is required.'],
@@ -11,7 +16,7 @@ const variantSchema = new Schema({
   },
 });
 
-const inventorySchema = new Schema({
+const inventorySchema = new Schema<Inventory>({
   quantity: {
     type: Number,
     required: [true, 'Inventory quantity is required.'],
@@ -23,7 +28,7 @@ const inventorySchema = new Schema({
   },
 });
 
-const productSchema = new Schema({
+const productSchema = new Schema<Product>({
   name: {
     type: String,
     required: [true, 'Product name is required.'],
@@ -46,7 +51,7 @@ const productSchema = new Schema({
     required: [true, 'Product tags are required.'],
   },
   variants: {
-    type: variantSchema,
+    type: [variantSchema],
     required: [true, 'Product variants are required.'],
   },
   inventory: {
@@ -55,6 +60,4 @@ const productSchema = new Schema({
   },
 });
 
-const Product = model('Product', productSchema);
-
-export default Product;
+export const ProductModel = model('Product', productSchema);
