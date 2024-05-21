@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import { productsRoute } from './app/modules/E-commerce Product/product.route';
+import { OrderRoute } from './app/modules/order/order.route';
 
 const app: Application = express();
 
@@ -8,7 +9,8 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-app.use('/api', productsRoute);
+app.use('/api/v1', productsRoute);
+app.use('/api/v2', OrderRoute);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Server is running');
