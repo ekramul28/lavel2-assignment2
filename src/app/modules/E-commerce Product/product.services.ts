@@ -8,10 +8,22 @@ const createProductIntoDB = async (product: Product) => {
   return result;
 };
 
-//getAllProduct Api
+//getAllProduct and search Api
 
-const getAllProductIntoDB = async () => {
-  const result = await ProductModel.find();
+const getAllProductAndSearchIntoDB = async (searchTerm: string) => {
+  let result;
+  if (searchTerm) {
+    result = await ProductModel.find({
+      $or: [
+        { name: { $regex: searchTerm, $options: 'i' } },
+        { description: { $regex: searchTerm, $options: 'i' } },
+        { category: { $regex: searchTerm, $options: 'i' } },
+        { tags: { $regex: searchTerm, $options: 'i' } },
+      ],
+    });
+  } else {
+    result = await ProductModel.find();
+  }
   return result;
 };
 
@@ -48,18 +60,15 @@ const deleteProductByIdInToDB = async (productId: string) => {
 
 //Search a product Api
 
-const searchProductName = async (Name: string) => {
-  const result = await ProductModel.find({
-    $or: [{ name: { $regex: Name, $options: 'i' } }],
-  });
-  return result;
-};
+// const searchProductName = async () => {
+
+//   return result;
+// };
 
 export const ProductService = {
   createProductIntoDB,
-  getAllProductIntoDB,
+  getAllProductAndSearchIntoDB,
   getProductByIdInToDB,
   updateProductByIdInToDB,
   deleteProductByIdInToDB,
-  searchProductName,
 };
