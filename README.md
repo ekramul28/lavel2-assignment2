@@ -31,7 +31,7 @@ This project is an e-commerce API built with Express and TypeScript, integrating
 1. Clone the repository
     ```bash
     git clone [https://github.com/your-username/ecommerce-api.git](https://github.com/ekramul28/lavel2-assignment2.git)
-    cd ecommerce-api
+    cd lavel2-assignment2
     ```
 
 2. Install dependencies
