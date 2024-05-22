@@ -11,8 +11,8 @@ const app = (0, express_1.default)();
 //parsers
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
-app.use('/api/v1', product_route_1.productsRoute);
-app.use('/api/v2', order_route_1.OrderRoute);
+app.use('/api/products', product_route_1.productsRoute);
+app.use('/api/orders', order_route_1.OrderRoute);
 app.get('/', (req, res) => {
     res.send('Server is running');
 });
