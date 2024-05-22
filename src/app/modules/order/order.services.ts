@@ -12,20 +12,19 @@ const createOrderIntoDB = async (order: Order) => {
 
 //get all order api
 
-const getAllOrderIntoDB = async () => {
-  const result = await OrderModel.find();
+const getAllOrderAndSearchIntoDB = async (email: string) => {
+  let result;
+  if (email) {
+    result = await OrderModel.find({ email });
+  } else {
+    result = await OrderModel.find();
+  }
   return result;
 };
 
 //Search order by Email Api
 
-const searchOrderEmail = async (email: string) => {
-  const result = await OrderModel.find({ email });
-  return result;
-};
-
 export const OrderService = {
   createOrderIntoDB,
-  getAllOrderIntoDB,
-  searchOrderEmail,
+  getAllOrderAndSearchIntoDB,
 };
